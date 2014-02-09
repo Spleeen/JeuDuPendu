@@ -37,13 +37,19 @@ public class ServletPendu extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
+
             Pendu pendu = null;
             HttpSession session = request.getSession(true);
-            pendu = (Pendu) session.getAttribute("instanceP");
+            
+            String newgame = request.getParameter("newgame");
+            if (request.getParameter("newgame") != null && request.getParameter("newgame").equals("true")) {
+                session.removeAttribute("instancePendu");
+            }
+            pendu = (Pendu) session.getAttribute("instancePendu");
 
             if (pendu == null) {
                 pendu = new Pendu();
-                session.setAttribute("instanceP", pendu);
+                session.setAttribute("instancePendu", pendu);
                 pendu.getRandomWord();
             } else {
                 if (request.getParameter("inputLetter") != null) {

@@ -31,7 +31,7 @@
 
 
         <link type="text/css" rel="stylesheet" href="http://french.jotform.com/css/styles/buttons/form-submit-button-simple_orange.css?3.2.514"/>
-        <form class="jotform-form" action="./toto" method="post" name="form_40364041732344" id="40364041732344" accept-charset="utf-8">
+        <form class="jotform-form" action="./pendu" method="post" name="form_40364041732344" id="40364041732344" accept-charset="utf-8">
             <input type="hidden" name="formID" value="40364041732344" />
             <div class="form-all">
                 <ul class="form-section">
@@ -71,13 +71,13 @@
             </script>
         </form>
         <p>
-         <h1>Lettres déjà testées :
-             <%
-            Pendu pendu = (Pendu) request.getAttribute("pendu");
-            for (Character c : pendu.getWordTested()){
-                 out.println(" "+c);
-             }
-        %></h1>
+        <h1>Lettres déjà testées :
+            <%
+                Pendu pendu = (Pendu) request.getAttribute("pendu");
+                for (Character c : pendu.getWordTested()) {
+                    out.println(" " + c);
+                }
+            %></h1>
 
         <h1>Le mot découvert : ${pendu.getDiscoverWord()}</h1>
         <%
@@ -85,10 +85,12 @@
                 out.println("<img src=\"victoire.jpg\"/>");
             } else if (pendu.gameOver()) {
                 out.println("<img src=\"perdu.jpg\"/>");
-                out.println("<h1>Le mot à trouver était : " + pendu.getHiddenWord()+"</h1>");
+                out.println("<h1>Le mot à trouver était : " + pendu.getHiddenWord() + "</h1>");
             }
         %>
-        
+        <a href="?newgame=true"><img src="Nouvelle_partie.png" width="300"/></a>
+
+
     </p>
 
 </body>
