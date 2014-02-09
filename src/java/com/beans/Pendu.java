@@ -16,10 +16,10 @@ public class Pendu implements Serializable {
 
     private String hiddenWord = new String();
     private StringBuffer discoverWord = new StringBuffer();
-    private int nbTest = 0;
+    private int nbError = 0;
 
     public int getNbTest() {
-        return nbTest;
+        return nbError;
     }
 
     public Pendu() {
@@ -50,15 +50,17 @@ public class Pendu implements Serializable {
     }
 
     public void refresh(char car) {
+        boolean find = false;
         for (int i = 0; i < hiddenWord.length(); i++) {
             if (Character.isLetter(car)
                     && (Character.toLowerCase(StringUtilities
                             .removeDiacriticalMarks(hiddenWord).charAt(i)) == Character
                     .toLowerCase(car))) {
                 getDiscoverWord().setCharAt(i, hiddenWord.charAt(i));
+                find = true;
             }
         }
-        nbTest++;
+        if (!find) nbError++;
         wordTested.add(Character.toUpperCase(car));
     }
 
@@ -67,11 +69,11 @@ public class Pendu implements Serializable {
     }
 
     public boolean winner() {
-        return find() && (nbTest < 10);
+        return find() && (nbError < 10);
     }
 
     public boolean gameOver() {
-        return (nbTest > 10);
+        return (nbError > 10);
     }
 
     /**

@@ -42,7 +42,7 @@ public class ServletPendu extends HttpServlet {
             HttpSession session = request.getSession(true);
             
             String newgame = request.getParameter("newgame");
-            if (request.getParameter("newgame") != null && request.getParameter("newgame").equals("true")) {
+            if (newgame != null && newgame.equals("true")) {
                 session.removeAttribute("instancePendu");
             }
             pendu = (Pendu) session.getAttribute("instancePendu");
