@@ -26,6 +26,7 @@
                 JotForm.alterTexts({"alphabetic": "Ce champ ne peut contenir que des lettres.", "alphanumeric": "Ce champ ne peut contenir que des lettres et des chiffres.", "confirmClearForm": "Êtes-vous certain d'effacer le formulaire?", "confirmEmail": "Email ne correspond pas", "email": "Saisir une adresse courriel valide", "generalError": "Il y a des erreurs dans le formulaire. Merci de les corriger avant de continuer.", "generalPageError": "Il ya des erreurs sur cette page. S'il vous plaît corriger avant de continuer.", "gradingScoreError": "Le score total devrais être moins ou égal à", "incompleteFields": "Des champs obligatoires ne sont pas complétés. Veuillez les compléter.", "inputCarretErrorA": "L'entrée ne doit pas être inférieure à la valeur minimale:", "inputCarretErrorB": "L'entré de devrais pas être plus grande que la valeur maximum:", "lessThan": "Votre score devrait être inférieur ou égal à ", "maxDigitsError": "Les chiffres maximum autorisé sont ", "maxSelectionsError": "Vous avez sélectionné le maximum autorisé.", "minSelectionsError": "Le nombre minimum requis de sélections est", "multipleFileUploads_emptyError": "{file} est vide, veuillez sélectionner à nouveau les fichiers sans elle.", "multipleFileUploads_minSizeError": "{file} est trop petite, la taille de fichier minimale est {minSizeLimit}.", "multipleFileUploads_onLeave": "Les fichiers ont été envoyé, si vous quittez maintenant l'envoi sera annulé.", "multipleFileUploads_sizeError": "{file} est trop grand, la taille maximale d'un fichier est {sizeLimit}.", "multipleFileUploads_typeError": "{file} a invalide extension. Seulement {extensions} sont autorisées.", "numeric": "Ce champ ne peut contenir que des valeurs numériques", "pastDatesDisallowed": "La date doit pas être dans le passé", "pleaseWait": "S'il vous plaît patienter...", "required": "Ce champs est requis.", "requireEveryRow": "Chaque ligne est nécessaire.", "requireOne": "Au moins un champ est requis", "submissionLimit": "Désolé ! Une seule inscription est permise. Les propositions multiples sont désactivés pour ce formulaire.", "uploadExtensions": "Vous ne pouvez uploader que les fichiers suivants :", "uploadFilesize": "La taille du fichier ne peut pas dépasser :"});
             });
         </script>
+
         <link href="http://french.jotform.com/static/formCss.css?3.2.514" rel="stylesheet" type="text/css" />
         <link type="text/css" media="print" rel="stylesheet" href="http://french.jotform.com/css/printForm.css?3.2.514" />
 
@@ -47,7 +48,7 @@
                             Taper une lettre<span class="form-required">*</span>
                         </label>
                         <div id="cid_1" class="form-input-wide">
-                            <input type="text" class=" form-textbox validate[required, Alphabetic]" data-type="input-textbox" id="input_1" name="inputLetter" size="1" value="" />
+                            <input type="text" class=" form-textbox validate[required, Alphabetic]" data-type="input-textbox" id="inputLetter" name="inputLetter" size="1" value="" />
                         </div>
                     </li>
                     <li class="form-line" id="id_2">
@@ -88,10 +89,13 @@
                 out.println("<h1>Le mot à trouver était : " + pendu.getHiddenWord() + "</h1>");
             }
         %>
+        <br/>
         <a href="?newgame=true"><img src="Nouvelle_partie.png" width="300"/></a>
 
 
     </p>
-
+        <script language="javascript">
+            document.getElementById('inputLetter').focus();
+        </script>
 </body>
 </html>
