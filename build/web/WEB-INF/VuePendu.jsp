@@ -29,7 +29,34 @@
 
         <link href="http://french.jotform.com/static/formCss.css?3.2.514" rel="stylesheet" type="text/css" />
         <link type="text/css" media="print" rel="stylesheet" href="http://french.jotform.com/css/printForm.css?3.2.514" />
-
+        <style>
+            *{
+                
+            }
+            html, body{
+                margin:0;
+                padding:0;
+                background-image: url("image.jpeg");
+                
+            }
+            .form-header-group{
+                text-align:center;
+                font-size:22px;
+                background-color: #fff;
+            }
+             #pendu{
+                 width:500px;
+                 margin: 50px auto;
+                 text-align:center;
+                 border:none;
+             }
+            #pendu td{
+                
+                background-color:#ffffff;
+            }
+            
+            
+        </style>
 
         <link type="text/css" rel="stylesheet" href="http://french.jotform.com/css/styles/buttons/form-submit-button-simple_orange.css?3.2.514"/>
         <form class="jotform-form" action="./pendu" method="post" name="form_40364041732344" id="40364041732344" accept-charset="utf-8">
@@ -39,31 +66,66 @@
                     <li id="cid_3" class="form-input-wide">
                         <div class="form-header-group">
                             <h1 id="header_3" class="form-header">
-                                Le jeu du pendu
+                                Le Jeu du Pendu
                             </h1>
                         </div>
                     </li>
-                    <li class="form-line" id="id_1">
-                        <label class="form-label-top" id="label_1" for="input_1">
-                            Taper une lettre<span class="form-required">*</span>
-                        </label>
-                        <div id="cid_1" class="form-input-wide">
-                            <input type="text" class=" form-textbox validate[required, Alphabetic]" data-type="input-textbox" id="inputLetter" name="inputLetter" size="1" value="" />
-                        </div>
-                    </li>
-                    <li class="form-line" id="id_2">
-                        <div id="cid_2" class="form-input-wide">
-                            <div style="text-align:left" class="form-buttons-wrapper">
-                                <button id="input_2" type="submit" class="form-submit-button form-submit-button-simple_orange">
-                                    Tentez votre chance !
-                                </button>
-                            </div>
-                        </div>
-                    </li>
-                    <li style="display:none">
-                        Should be Empty:
-                        <input type="text" name="website" value="" />
-                    </li>
+                    <table id="pendu" cellpadding="0" cellmargin="0" border="0">
+                    <tr>
+                        <td>
+                            <li class="form-line" id="id_1">
+                                <label class="form-label-top" id="label_1" for="input_1">
+                                    Taper une lettre<span class="form-required">*</span>
+                                </label>
+                                <div id="cid_1" class="form-input-wide">
+                                    <input type="text" class=" form-textbox validate[required, Alphabetic]" data-type="input-textbox" id="inputLetter" name="inputLetter" size="1" value="" />
+                                </div>
+                            </li>
+                        </td>
+                        <td>
+                            <li class="form-line" id="id_2">
+                                <div id="cid_2" class="form-input-wide">
+                                    <div style="text-align:left" class="form-buttons-wrapper">
+                                        <button id="input_2" type="submit" class="form-submit-button form-submit-button-simple_orange">
+                                            Tentez votre chance !
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        
+                            <li style="display:none">
+                                Should be Empty:
+                                <input type="text" name="website" value="" />
+                            </li>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td colspan="2">
+                           
+                            <h1>Lettres déjà testées :
+                                <%
+                                    Pendu pendu = (Pendu) request.getAttribute("pendu");
+                                    for (Character c : pendu.getWordTested()) {
+                                        out.println(" " + c);
+                                    }
+                                %></h1>
+
+                            <h1>Le mot découvert : ${pendu.getDiscoverWord()}</h1>
+                            <%
+                                if (pendu.winner()) {
+                                    out.println("<img src=\"victoire.jpg\"/>");
+                                } else if (pendu.gameOver()) {
+                                    out.println("<img src=\"perdu.jpg\"/>");
+                                    out.println("<h1>Le mot à trouver était : " + pendu.getHiddenWord() + "</h1>");
+                                }
+                            %>
+                            <br />
+                            <br />
+                            <a href="?newgame=true"><img src="Nouvelle_partie.png" width="300"/></a>
+                        </td>
+                        
+                    </tr>
+                    </table>
                 </ul>
             </div>
             <input type="hidden" id="simple_spc" name="simple_spc" value="40364041732344" />
@@ -71,26 +133,7 @@
                 document.getElementById("si" + "mple" + "_spc").value = "40364041732344-40364041732344";
             </script>
         </form>
-        <p>
-        <h1>Lettres déjà testées :
-            <%
-                Pendu pendu = (Pendu) request.getAttribute("pendu");
-                for (Character c : pendu.getWordTested()) {
-                    out.println(" " + c);
-                }
-            %></h1>
-
-        <h1>Le mot découvert : ${pendu.getDiscoverWord()}</h1>
-        <%
-            if (pendu.winner()) {
-                out.println("<img src=\"victoire.jpg\"/>");
-            } else if (pendu.gameOver()) {
-                out.println("<img src=\"perdu.jpg\"/>");
-                out.println("<h1>Le mot à trouver était : " + pendu.getHiddenWord() + "</h1>");
-            }
-        %>
-        <br/>
-        <a href="?newgame=true"><img src="Nouvelle_partie.png" width="300"/></a>
+        
 
 
     </p>
