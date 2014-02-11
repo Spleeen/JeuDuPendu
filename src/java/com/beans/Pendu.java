@@ -12,13 +12,13 @@ import java.util.Vector;
 public class Pendu implements Serializable {
 
     private Vector<String> dico = new Vector<String>();
-    private Vector<Character> wordTested = new Vector<Character>();
+    private Vector<Character> charTested = new Vector<Character>();
 
     private String hiddenWord = new String();
     private StringBuffer discoverWord = new StringBuffer();
     private int nbError = 0;
 
-    public int getNbTest() {
+    public int getNbError() {
         return nbError;
     }
 
@@ -51,17 +51,24 @@ public class Pendu implements Serializable {
 
     public void refresh(char car) {
         boolean find = false;
-        for (int i = 0; i < hiddenWord.length(); i++) {
-            if (Character.isLetter(car)
-                    && (Character.toLowerCase(StringUtilities
-                            .removeDiacriticalMarks(hiddenWord).charAt(i)) == Character
-                    .toLowerCase(car))) {
-                getDiscoverWord().setCharAt(i, hiddenWord.charAt(i));
-                find = true;
+        
+        int lastIndex = getCharTested().lastIndexOf(car);
+        if(lastIndex != -1)
+            nbError++;
+        else{
+            for (int i = 0; i < hiddenWord.length(); i++) {
+                if (Character.isLetter(car)
+                        && (Character.toLowerCase(StringUtilities
+                                .removeDiacriticalMarks(hiddenWord).charAt(i)) == Character
+                        .toLowerCase(car))) {
+                    
+                    getDiscoverWord().setCharAt(i, hiddenWord.charAt(i));
+                    find = true;
+                }
             }
+            if (!find) nbError++;
         }
-        if (!find) nbError++;
-        wordTested.add(Character.toUpperCase(car));
+        charTested.add(Character.toUpperCase(car));
     }
 
     private boolean find() {
@@ -69,11 +76,11 @@ public class Pendu implements Serializable {
     }
 
     public boolean winner() {
-        return find() && (nbError < 10);
+        return find() && (nbError < 7);
     }
 
     public boolean gameOver() {
-        return (nbError > 10);
+        return (nbError > 7);
     }
 
     /**
@@ -87,8 +94,8 @@ public class Pendu implements Serializable {
      *
      * @return
      */
-    public Vector<Character> getWordTested() {
-        return wordTested;
+    public Vector<Character> getCharTested() {
+        return charTested;
     }
 
     /**
